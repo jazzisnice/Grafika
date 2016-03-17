@@ -1,0 +1,8 @@
+﻿  Skeleton.cpp
+c:\users\viktor\downloads\grafika_hazi_1\opengl\programs\skeleton\skeleton\skeleton.cpp(312): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\viktor\downloads\grafika_hazi_1\opengl\programs\skeleton\skeleton\skeleton.cpp(319): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\viktor\downloads\grafika_hazi_1\opengl\programs\skeleton\skeleton\skeleton.cpp(328): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\viktor\downloads\grafika_hazi_1\opengl\programs\skeleton\skeleton\skeleton.cpp(374): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\users\viktor\downloads\grafika_hazi_1\opengl\programs\skeleton\skeleton\skeleton.cpp(374): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\viktor\downloads\grafika_hazi_1\opengl\programs\skeleton\skeleton\skeleton.cpp(662): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Skeleton.vcxproj -> C:\Users\viktor\Downloads\Grafika_hazi_1\opengl\Programs\Skeleton\bin\Skeleton.exe
