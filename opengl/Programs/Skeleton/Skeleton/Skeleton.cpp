@@ -398,7 +398,7 @@ public:
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 	}
-	void Animate(float time) { /*
+	void Animate(float time) { 
 		float t = fmod(time, csomopontok[nVertices].t);
 		int i = 0;
 		if (nVertices > 1) {
@@ -406,20 +406,19 @@ public:
 				if (csomopontok[i].t <= t && t <= csomopontok[i + 1].t)
 					break;
 
-			for (; t <= csomopontok[i + 1].t; t += (csomopontok[i + 1].t - csomopontok[i].t) / 10) {
 				vec4 e = r_t(i, t);
 				wTx = e.v[0]; printf("Animate x koordinata: %f \n", e.v[0]);
 				wTy = e.v[1];
-			}
-		}*/
+			
+		}
 
 
 
 		//for ()
 		//	vec4 e = r_t(i, t);
-		wTx = 0;	
+		/*wTx = 0;	
 		wTy = 0;
-		sx = 1.0; // *sinf(t);
+		*/sx = 1.0; // *sinf(t);
 		sy = 1.0; // *cosf(t);
 		//wTx = 0; // 4 * cosf(t / 2);
 		//wTy = 0; // 4 * sinf(t / 2);
