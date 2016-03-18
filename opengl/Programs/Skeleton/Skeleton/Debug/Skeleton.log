@@ -1,10 +1,12 @@
 ﻿  Skeleton.cpp
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(312): warning C4305: 'argument': truncation from 'double' to 'const float'
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(319): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(321): warning C4305: 'argument': truncation from 'double' to 'const float'
 c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(328): warning C4305: 'argument': truncation from 'double' to 'const float'
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(375): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(375): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(402): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(686): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(702): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(337): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(395): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(395): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(422): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(645): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(727): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(743): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(744): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
   Skeleton.vcxproj -> C:\Users\viktor\Documents\GitHub\Grafika\opengl\Programs\Skeleton\bin\Skeleton.exe

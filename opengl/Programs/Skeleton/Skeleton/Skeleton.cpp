@@ -203,6 +203,15 @@ struct vec4 {
 	}
 };
 
+float len(vec4 a, vec4 b) {
+	float hossz = sqrtf((b.v[0] - a.v[0]) * (b.v[0] - a.v[0]) - (b.v[1] - a.v[1]) * (b.v[1] - a.v[1]));
+	return hossz;
+}
+
+float len(vec4 a) {
+	float hossz = sqrtf(a.v[0] * a.v[0] + a.v[1] * a.v[1]);
+	return hossz;
+}
 
 
 // 2D camera
@@ -347,8 +356,19 @@ public:
 		Animate(0);
 	}
 
+	float getX() {
+		return wTx;
+	}
+	float getY() {
+		return wTy;
+	}
+
 	void setCenter(float newCenter) {
 		center = newCenter;
+	}
+
+	void setR(float R) {
+		r = R;
 	}
 	void Create() {
 		glGenVertexArrays(1, &vao);
@@ -398,8 +418,8 @@ public:
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 	}
-	void Animate(float time) { 
-		float t = fmod(time, csomopontok[nVertices].t);
+	virtual void Animate(float time) {
+		float t = fmod(time, csomopontok[nVertices].t - csomopontok[0].t) + csomopontok[0].t;
 		int i = 0;
 		if (nVertices > 1) {
 			for (; i < nVertices+1; i++)
@@ -407,7 +427,8 @@ public:
 					break;
 
 				vec4 e = r_t(i, t);
-				wTx = e.v[0]; printf("Animate x koordinata: %f \n", e.v[0]);
+				printf("koordinatak: : : %f , %f \n", e.v[0], e.v[1]);
+				wTx = e.v[0]; 
 				wTy = e.v[1];
 			
 		}
@@ -439,6 +460,21 @@ public:
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 12); // draw a single triangle with vertices defined in vao
 
 	}
+};
+float tomegek = 10;
+class SmallStar : public Star {
+
+public:
+	/*void Animate(float time) {
+		vec4 e = (star.getX() - wTx, star.getY() - wTy, 0, 1);
+		float distance = len(e);
+		vec4 ero = e * tomegek / (distance * distance * distance);
+		
+		wTx = wTx + ero.v[0];
+		wTy = 0;
+		sx = 0.4 * sinf(time);
+		sy = 0.4; 
+	}*/
 };
 
 
@@ -513,7 +549,7 @@ public:
 
 class LineStrip {
 	GLuint vao, vbo;        // vertex array object, vertex buffer object
-	float  vertexData[550]; // interleaved data of coordinates and colors
+	float  vertexData[4400]; // interleaved data of coordinates and colors
 	float vertexData2[1000];
 	int k = 5;
 public:
@@ -544,38 +580,39 @@ public:
 	}
 
 	void AddPoint(float cX, float cY, float time) {
-		if (nVertices >= 10) return;
+		if (nVertices >= 9) return;
 		//printf("1 ---- A ket koordinata az egertol: %f es %f \n", cX, cY);
 
 		vec4 wVertex = vec4(cX, cY, 0, 1) * camera.Pinv() * camera.Vinv();
 
 		csomopontok[nVertices].koord = wVertex;
 		csomopontok[nVertices].t = time;// printf("%f \n", time);
-		for (int i = 0; i < nVertices; i++) {
-			csomopontok[i].seb = sebesseg(i);
+		if (nVertices > 0) {
+			for (int i = 0; i <= nVertices; i++) {
+				csomopontok[i].seb = sebesseg(i);
+			}
 		}
-		printf("aaaa");
 
 		csomopontok[nVertices + 1].koord = csomopontok[0].koord;
 		csomopontok[nVertices + 1].seb = csomopontok[0].seb;
-		csomopontok[nVertices + 1].t = csomopontok[nVertices].t + 1000;
+		csomopontok[nVertices + 1].t = csomopontok[nVertices].t + 500;
 
 		for (int i = 0; i < nVertices + 1; i++) {
 			int a = 0;
-			for (float t = csomopontok[i].t; t <= csomopontok[i + 1].t; t += (csomopontok[i + 1].t - csomopontok[i].t) / 10 ) {
+			for (float t = csomopontok[i].t; t <= csomopontok[i + 1].t; t += (csomopontok[i + 1].t - csomopontok[i].t) / 80 ) {
 				vec4 e = r_t(i, t);
-				vertexData[50 * i + a * 5] = e.v[0];
-				vertexData[50 * i + a * 5 + 1] = e.v[1];
-				vertexData[50 * i + a * 5 + 2] = 1;
-				vertexData[50 * i + a * 5 + 3] = 1;
-				vertexData[50 * i + a * 5 + 4] = 1;
+				vertexData[400 * i + a * 5] = e.v[0];
+				vertexData[400 * i + a * 5 + 1] = e.v[1];
+				vertexData[400 * i + a * 5 + 2] = 1;
+				vertexData[400 * i + a * 5 + 3] = 1;
+				vertexData[400 * i + a * 5 + 4] = 1;
 				a++;
 			}
 		}
 
 
-			nVertices++;
-		glBufferData(GL_ARRAY_BUFFER, (nVertices) * 50 * sizeof(float), vertexData, GL_DYNAMIC_DRAW);
+		nVertices++;
+		glBufferData(GL_ARRAY_BUFFER, (nVertices) * 400 * sizeof(float), vertexData, GL_DYNAMIC_DRAW);
 	}
 
 	void Draw() {
@@ -587,7 +624,7 @@ public:
 			else printf("uniform MVP cannot be set\n");
 
 			glBindVertexArray(vao);
-			glDrawArrays(GL_LINE_STRIP, 0, (nVertices)*10);
+			glDrawArrays(GL_LINE_STRIP, 0, (nVertices)*80);
 		}
 	}
 };
@@ -597,6 +634,7 @@ public:
 Triangle triangle;
 LineStrip lineStrip;
 Star star;
+SmallStar kisCsillag;
 
 // Initialization, create an OpenGL context
 void onInitialization() {
@@ -604,6 +642,8 @@ void onInitialization() {
 
 	// Create objects by setting up their vertex data on the GPU
 	star.Create();
+	kisCsillag.Create(); kisCsillag.setR(0.02);
+
 	//triangle.Create();
 	lineStrip.Create();
 
@@ -661,6 +701,7 @@ void onDisplay() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the screen
 
 	star.Draw();
+	kisCsillag.Draw();
 	//triangle.Draw();
 	
 	lineStrip.Draw();
@@ -700,6 +741,7 @@ void onIdle() {
 	triangle.Animate(sec);					// animate the triangle object
 	glutPostRedisplay();					// redraw the scene
 	star.Animate(time);
+	kisCsillag.Animate(time);
 }
 
 // Idaig modosithatod...
