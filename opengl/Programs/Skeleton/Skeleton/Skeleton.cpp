@@ -1,11 +1,11 @@
-ï»¿//=============================================================================================
+//=============================================================================================
 // Szamitogepes grafika hazi feladat keret. Ervenyes 2016-tol.
 // A //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // sorokon beluli reszben celszeru garazdalkodni, mert a tobbit ugyis toroljuk.
 // A beadott program csak ebben a fajlban lehet, a fajl 1 byte-os ASCII karaktereket tartalmazhat.
 // Tilos:
 // - mast "beincludolni", illetve mas konyvtarat hasznalni
-// - faljmuveleteket vegezni a printf-et kivÃ©ve
+// - faljmuveleteket vegezni a printf-et kivéve
 // - new operatort hivni a lefoglalt adat korrekt felszabaditasa nelkul
 // - felesleges programsorokat a beadott programban hagyni
 // - felesleges kommenteket a beadott programba irni a forrasmegjelolest kommentjeit kiveve
@@ -18,8 +18,8 @@
 //
 // NYILATKOZAT
 // ---------------------------------------------------------------------------------------------
-// Nev    : 
-// Neptun : 
+// Nev    : Burján Viktor
+// Neptun : MLTYU6
 // ---------------------------------------------------------------------------------------------
 // ezennel kijelentem, hogy a feladatot magam keszitettem, es ha barmilyen segitseget igenybe vettem vagy
 // mas szellemi termeket felhasznaltam, akkor a forrast es az atvett reszt kommentekben egyertelmuen jeloltem.
@@ -197,9 +197,7 @@ struct vec4 {
 	}
 	
 	vec4 operator/(const float oszto) {
-		/*v[0] = v[0] / oszto;
-		v[1] = v[1] / oszto;
-		*/return vec4(v[0] / oszto, v[1] / oszto, 0, 1);
+		return vec4(v[0] / oszto, v[1] / oszto, 0, 1);
 	}
 };
 
@@ -223,6 +221,10 @@ public:
 		Animate(0);
 	}
 
+	void setCenter(float x, float y) {
+		wCx = x;
+		wCy = y;
+	}
 	mat4 V() { // view matrix: translates the center to the origin
 		return mat4(1,    0, 0, 0,
 			        0,    1, 0, 0,
@@ -309,21 +311,19 @@ vec4 r_t(int i, float t) {
 int nVertices = 0;
 
 vec4 sebesseg(int i) {
-	/*if (i < 1 || i == nVertices+1) {
-	return vec4(0, 0, 0, 1);
-	}*/
+	
 
 	if (i == 0) {
 		float nevezo1 = csomopontok[1].t - csomopontok[0].t;
 		float nevezo2 = csomopontok[0].t - csomopontok[nVertices + 1].t;
-		printf("sebesseg fuggvenyben: %f  ---  %f ", csomopontok[1].koord.v[1], csomopontok[0].koord.v[1]);
+		//printf("sebesseg fuggvenyben: %f  ---  %f ", csomopontok[1].koord.v[1], csomopontok[0].koord.v[1]);
 		return ((csomopontok[1].koord - csomopontok[i].koord) / nevezo1 +
 			(csomopontok[0].koord - csomopontok[nVertices + 1].koord) / nevezo2) * 0.9;
 	}
 	if (i == nVertices + 1) {
 		float nevezo1 = csomopontok[0].t - csomopontok[i].t;
 		float nevezo2 = csomopontok[i].t - csomopontok[i - 1].t;
-		printf("sebesseg fuggvenyben: %f  ---  %f ", csomopontok[0].koord.v[1], csomopontok[i].koord.v[1]);
+		//printf("sebesseg fuggvenyben: %f  ---  %f ", csomopontok[0].koord.v[1], csomopontok[i].koord.v[1]);
 		return ((csomopontok[0].koord - csomopontok[i].koord) / nevezo1 +
 			(csomopontok[i].koord - csomopontok[i - 1].koord) / nevezo2) * 0.9;
 	}
@@ -332,17 +332,23 @@ vec4 sebesseg(int i) {
 	else {
 		float nevezo1 = csomopontok[i + 1].t - csomopontok[i].t;
 		float nevezo2 = csomopontok[i].t - csomopontok[i - 1].t;
-		printf("sebesseg fuggvenyben: %f  ---  %f ", csomopontok[i + 1].koord.v[1], csomopontok[i].koord.v[1]);
+		//printf("sebesseg fuggvenyben: %f  ---  %f ", csomopontok[i + 1].koord.v[1], csomopontok[i].koord.v[1]);
 		return ((csomopontok[i + 1].koord - csomopontok[i].koord) / nevezo1 +
 			(csomopontok[i].koord - csomopontok[i - 1].koord) / nevezo2) * 0.9;
 	}
 }
+float tomeg1 = 3;
+float tomeg2 = 2;
+
+float allando = 0.005f;
 
 class Star {
+protected:
+	float tomeg = 10;
 public:
 	unsigned int vao; //Vertex array object id
 	float sx, sy; //SCALING-re van
-	float wTx, wTy; // translation - nem tudom mi ez
+	float wTx, wTy; 
 	unsigned int vbo[2];
 
 	float r = 2.0;
@@ -350,7 +356,7 @@ public:
 	float red = 1;
 	float green = 1;
 	float blue = 0;
-//public:
+
 	float center = 0;
 	Star() {
 		Animate(0);
@@ -377,7 +383,7 @@ public:
 
 		glGenBuffers(2, &vbo[0]);
 
-		//vertex koordinÃ¡tÃ¡k:
+		//vertex koordináták:
 		glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
 		static float vertexCoords[] = {
 			center - (r / 2), center - (r / 2),                         //14
@@ -405,7 +411,7 @@ public:
 			2, GL_FLOAT,
 			GL_FALSE,
 			0, NULL);
-		//Eddig voltak a koordinÃ¡tÃ¡k, innen jÃ¶nnek a szÃ­nek
+		//Eddig voltak a koordináták, innen jönnek a színek
 
 		glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
 		static float vertexColors[] = {
@@ -427,19 +433,12 @@ public:
 					break;
 
 				vec4 e = r_t(i, t);
-				printf("koordinatak: : : %f , %f \n", e.v[0], e.v[1]);
+				//printf("koordinatak: : : %f , %f \n", e.v[0], e.v[1]);
 				wTx = e.v[0]; 
 				wTy = e.v[1];
 			
 		}
-
-
-
-		//for ()
-		//	vec4 e = r_t(i, t);
-		/*wTx = 0;	
-		wTy = 0;
-		*/sx = 1.0; // *sinf(t);
+		sx = 1.0; // *sinf(t);
 		sy = 1.0; // *cosf(t);
 		//wTx = 0; // 4 * cosf(t / 2);
 		//wTy = 0; // 4 * sinf(t / 2);
@@ -461,22 +460,126 @@ public:
 
 	}
 };
-float tomegek = 10;
-class SmallStar : public Star {
 
+class Star2 {
+protected:
+	float tomeg = 2;
 public:
-	/*void Animate(float time) {
-		vec4 e = (star.getX() - wTx, star.getY() - wTy, 0, 1);
-		float distance = len(e);
-		vec4 ero = e * tomegek / (distance * distance * distance);
-		
-		wTx = wTx + ero.v[0];
-		wTy = 0;
-		sx = 0.4 * sinf(time);
-		sy = 0.4; 
-	}*/
-};
+	unsigned int vao; //Vertex array object id
+	float sx, sy; //SCALING-re van
+	float wTx, wTy; // translation
+	unsigned int vbo[2];
 
+	vec4 v = vec4(0.0,0.0,0.0,1.0);
+
+	float r = 1.0;
+
+	float red = 0;
+	float green = 1;
+	float blue = 1;
+
+	float center = 0;
+	Star2() {
+		Animate(0);
+	}
+
+	float getX() {
+		return wTx;
+	}
+	float getY() {
+		return wTy;
+	}
+
+	void setCenter(float newCenter) {
+		center = newCenter;
+	}
+
+	void setR(float R) {
+		r = R;
+	}
+	void Create() {
+		glGenVertexArrays(1, &vao);
+		glBindVertexArray(vao);
+
+
+		glGenBuffers(2, &vbo[0]);
+
+		//vertex koordináták:
+		glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
+		static float vertexCoords[] = {
+			center - (r / 2), center - (r / 2),                         //14
+			center - (r / 2) , center + (r / 2),                  //1
+			center + (r / 2) , center + (r / 2),                  //5
+			center + (r / 2), center - (r / 2),                       //9
+			center - (r / 2), center - (r / 2),                         //14
+			center - (r / 6) , center + (r / 2),                    //2
+			center + (r / 6) , center + (r / 2),                    //4
+			center             , center + (r - r * (1.0 / 3.0)) ,   //3
+			center + (r - r * (1.0 / 3.0)), center,                 //7
+			center           , center - (r - r * (1.0 / 3.0)),      //11
+			center - (r - r * (1.0 / 3.0)), center,                 //16
+			center             , center + (r - r * (1.0 / 3.0))             //3
+		};
+		glBufferData(
+			GL_ARRAY_BUFFER,
+			sizeof(vertexCoords),
+			vertexCoords,
+			GL_DYNAMIC_DRAW);
+		glEnableVertexAttribArray(0);
+
+		glVertexAttribPointer(
+			0,
+			2, GL_FLOAT,
+			GL_FALSE,
+			0, NULL);
+		//Eddig voltak a koordináták, innen jönnek a színek
+
+		glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
+		static float vertexColors[] = {
+			red, green, blue,  red, green, blue,   red, green, blue,   red, green, blue,   red, green, blue,
+			red, green, blue,  red, green, blue,   red, green, blue,   red, green, blue,   red, green, blue,
+			red, green, blue,  red, green, blue,   red, green, blue
+		};
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertexColors), vertexColors, GL_DYNAMIC_DRAW);
+
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+	}
+
+	void setV(vec4 nagyCsillag) {
+		vec4 e = nagyCsillag - vec4(wTx, wTy, 0, 1);
+		float len = sqrtf(e.v[0] * e.v[0] + e.v[1] * e.v[1]);
+		if (len > 0.06) {
+			vec4 k = e * ((tomeg1 * tomeg2) / (len *len *len)) * allando; //printf("mozgas vektora: %f , %f \n", e.v[0], e.v[1]);
+			v = k / tomeg2 - (v*0.01);
+		}
+		else {
+		}
+	}
+	void Animate(float time) {
+		wTx += v.v[0];
+		wTy += v.v[1];
+		sx = 1;
+		sy = 1;
+	}
+
+	void Draw() {
+
+		mat4 M(sx, 0, 0, 0,
+			0, sy, 0, 0,
+			0, 0, 0, 0,
+			wTx, wTy, 0, 1); // model matrix
+
+		mat4 MVPTransform = M * camera.V() * camera.P();
+		int location = glGetUniformLocation(shaderProgram, "MVP");
+		if (location >= 0) glUniformMatrix4fv(location, 1, GL_TRUE, MVPTransform); // set uniform variable MVP to the MVPTransform
+		else printf("uniform MVP cannot be set\n");
+
+		glBindVertexArray(vao); // make the vao and its vbos active playing the role of the data source
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 12); // draw a single triangle with vertices defined in vao
+
+	}
+};
 
 class Triangle {
 	unsigned int vao;	// vertex array object id
@@ -553,12 +656,6 @@ class LineStrip {
 	float vertexData2[1000];
 	int k = 5;
 public:
-	/*
-	void sebesseg() {
-		for (int i = 0; i < nVertices; i++) {
-			if (nVertices == 0 || nVertices == 1) return;
-		}
-	}*/
 
 	LineStrip() {
 		nVertices = 0;
@@ -634,7 +731,8 @@ public:
 Triangle triangle;
 LineStrip lineStrip;
 Star star;
-SmallStar kisCsillag;
+Star2 star2;
+Star2 star3;
 
 // Initialization, create an OpenGL context
 void onInitialization() {
@@ -642,7 +740,11 @@ void onInitialization() {
 
 	// Create objects by setting up their vertex data on the GPU
 	star.Create();
-	kisCsillag.Create(); kisCsillag.setR(0.02);
+	star2.Create();
+	star3.Create();
+
+	star3.wTx = 7;
+	star3.wTy = 7;
 
 	//triangle.Create();
 	lineStrip.Create();
@@ -701,22 +803,32 @@ void onDisplay() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the screen
 
 	star.Draw();
-	kisCsillag.Draw();
+
 	//triangle.Draw();
 	
 	lineStrip.Draw();
-	
+
+	star2.Draw();
+	star3.Draw();
+
 	glutSwapBuffers();									// exchange the two buffers
 }
 
 // Key of ASCII code pressed
 void onKeyboard(unsigned char key, int pX, int pY) {
 	if (key == 'd') glutPostRedisplay();         // if d, invalidate display, i.e. redraw
+	if (key == ' ') {
+		printf("\n asdasdasd ");
+		camera.setCenter(star.getX(), star.getY());
+		glutPostRedisplay();
+	}
 }
 
 // Key of ASCII code released
 void onKeyboardUp(unsigned char key, int pX, int pY) {
-
+	if (key == ' ') {
+		camera.setCenter(0, 0);
+	}
 }
 
 // Mouse click event
@@ -737,11 +849,19 @@ void onMouseMotion(int pX, int pY) {
 void onIdle() {
 	long time = glutGet(GLUT_ELAPSED_TIME); // elapsed time since the start of the program
 	float sec = time / 1000.0f;				// convert msec to sec
-	camera.Animate(sec);					// animate the camera
+	//camera.Animate(sec);					// animate the camera
 	triangle.Animate(sec);					// animate the triangle object
 	glutPostRedisplay();					// redraw the scene
+
 	star.Animate(time);
-	kisCsillag.Animate(time);
+	
+	star2.setV(vec4(star.wTx, star.wTy, 0, 1));
+	star3.setV(vec4(star.wTx, star.wTy, 0, 1));
+
+	//star2.setV(vec4(star.getX(), star.getY(), 0, 1));
+	//star3.setV(vec4(star.getX(), star.getY(), 0, 1));
+	star2.Animate(time);
+	star3.Animate(time); //printf(" --- %f, %f \n ", star3.wTx, star3.wTy);
 }
 
 // Idaig modosithatod...
