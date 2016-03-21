@@ -274,7 +274,7 @@ struct Csomopont {
 	float t;
 };
 
-Csomopont csomopontok[10];
+Csomopont csomopontok[11];
 
 
 
@@ -340,7 +340,7 @@ vec4 sebesseg(int i) {
 float tomeg1 = 3;
 float tomeg2 = 2;
 
-float allando = 0.005f;
+float allando = 0.001f;
 
 class Star {
 protected:
@@ -438,8 +438,8 @@ public:
 				wTy = e.v[1];
 			
 		}
-		sx = 1.0; // *sinf(t);
-		sy = 1.0; // *cosf(t);
+		sx = 0.6 + fabs(sinf(time/220.0)); // *sinf(t);
+		sy = 0.6 + fabs(sinf(time/220.0)); // *cosf(t);
 		//wTx = 0; // 4 * cosf(t / 2);
 		//wTy = 0; // 4 * sinf(t / 2);
 	}
@@ -549,9 +549,9 @@ public:
 	void setV(vec4 nagyCsillag) {
 		vec4 e = nagyCsillag - vec4(wTx, wTy, 0, 1);
 		float len = sqrtf(e.v[0] * e.v[0] + e.v[1] * e.v[1]);
-		if (len > 0.06) {
+		if (len > 0.03) {
 			vec4 k = e * ((tomeg1 * tomeg2) / (len *len *len)) * allando; //printf("mozgas vektora: %f , %f \n", e.v[0], e.v[1]);
-			v = k / tomeg2 - (v*0.01);
+			v = k / tomeg2 - (v*0.08);
 		}
 		else {
 		}
@@ -559,8 +559,8 @@ public:
 	void Animate(float time) {
 		wTx += v.v[0];
 		wTy += v.v[1];
-		sx = 1;
-		sy = 1;
+		sx = 0.3 + fabs(sinf(time / 180.0)); 
+		sy = 0.3 + fabs(sinf(time / 180.0));
 	}
 
 	void Draw() {
@@ -677,7 +677,7 @@ public:
 	}
 
 	void AddPoint(float cX, float cY, float time) {
-		if (nVertices >= 9) return;
+		if (nVertices >= 10) return;
 		//printf("1 ---- A ket koordinata az egertol: %f es %f \n", cX, cY);
 
 		vec4 wVertex = vec4(cX, cY, 0, 1) * camera.Pinv() * camera.Vinv();
@@ -818,9 +818,11 @@ void onDisplay() {
 void onKeyboard(unsigned char key, int pX, int pY) {
 	if (key == 'd') glutPostRedisplay();         // if d, invalidate display, i.e. redraw
 	if (key == ' ') {
-		printf("\n asdasdasd ");
-		camera.setCenter(star.getX(), star.getY());
-		glutPostRedisplay();
+		//printf("\n asdasdasd ");
+		camera.wCx = star.wTx;
+		camera.wCy = star.wTy;
+		//camera.setCenter(star.getX(), star.getY());
+		//glutPostRedisplay();
 	}
 }
 
