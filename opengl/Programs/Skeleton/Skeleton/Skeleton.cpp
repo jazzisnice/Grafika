@@ -340,7 +340,7 @@ vec4 sebesseg(int i) {
 float tomeg1 = 3;
 float tomeg2 = 2;
 
-float allando = 0.001f;
+float allando = 0.006f;
 
 class Star {
 protected:
@@ -353,6 +353,8 @@ public:
 
 	float r = 2.0;
 
+	float rotX = 1;
+	float rotY = 1;
 	float red = 1;
 	float green = 1;
 	float blue = 0;
@@ -437,6 +439,8 @@ public:
 				wTx = e.v[0]; 
 				wTy = e.v[1];
 			
+				rotX = cos(time / 800);
+				rotY = sinf(time / 800);
 		}
 		sx = 0.6 + fabs(sinf(time/220.0)); // *sinf(t);
 		sy = 0.6 + fabs(sinf(time/220.0)); // *cosf(t);
@@ -445,12 +449,23 @@ public:
 	}
 	void Draw() {
 
-		mat4 M(sx, 0, 0, 0,
+		mat4 Scale(sx, 0, 0, 0,
 			0, sy, 0, 0,
 			0, 0, 0, 0,
-			wTx, wTy, 0, 1); // model matrix
+			0, 0, 0, 1);
 
-		mat4 MVPTransform = M * camera.V() * camera.P();
+		mat4 Trans(1, 0, 0, 0,
+			0, 1, 0, 0,
+			0, 0, 1, 0,
+			wTx, wTy, 0, 1);
+
+
+		mat4 Rotate(rotX, rotY, 0, 0,
+			-rotY, rotX, 0, 0,
+			0, 0, 1, 0,
+			0, 0, 0, 1);
+
+		mat4 MVPTransform = Scale * Rotate * Trans * camera.V() * camera.P();
 		int location = glGetUniformLocation(shaderProgram, "MVP");
 		if (location >= 0) glUniformMatrix4fv(location, 1, GL_TRUE, MVPTransform); // set uniform variable MVP to the MVPTransform
 		else printf("uniform MVP cannot be set\n");
@@ -469,6 +484,9 @@ public:
 	float sx, sy; //SCALING-re van
 	float wTx, wTy; // translation
 	unsigned int vbo[2];
+
+	float rotX = 0;
+	float rotY = 0;
 
 	vec4 v = vec4(0.0,0.0,0.0,1.0);
 
@@ -549,11 +567,12 @@ public:
 	void setV(vec4 nagyCsillag) {
 		vec4 e = nagyCsillag - vec4(wTx, wTy, 0, 1);
 		float len = sqrtf(e.v[0] * e.v[0] + e.v[1] * e.v[1]);
-		if (len > 0.03) {
+		if (len > 0.05) {
 			vec4 k = e * ((tomeg1 * tomeg2) / (len *len *len)) * allando; //printf("mozgas vektora: %f , %f \n", e.v[0], e.v[1]);
 			v = k / tomeg2 - (v*0.08);
 		}
 		else {
+			v = v*(-1);
 		}
 	}
 	void Animate(float time) {
@@ -561,16 +580,29 @@ public:
 		wTy += v.v[1];
 		sx = 0.3 + fabs(sinf(time / 180.0)); 
 		sy = 0.3 + fabs(sinf(time / 180.0));
+
+		rotX = cos(time / 800);
+		rotY = sinf(time / 800);
 	}
 
 	void Draw() {
-
-		mat4 M(sx, 0, 0, 0,
+		mat4 Scale(sx, 0, 0, 0,
 			0, sy, 0, 0,
 			0, 0, 0, 0,
-			wTx, wTy, 0, 1); // model matrix
+			0, 0, 0, 1);
 
-		mat4 MVPTransform = M * camera.V() * camera.P();
+		mat4 Trans(1, 0, 0, 0,
+			0, 1, 0, 0,
+			0, 0, 1, 0,
+			wTx, wTy, 0, 1);
+
+
+		mat4 Rotate(rotX, rotY, 0, 0,
+			-rotY, rotX, 0, 0,
+			0, 0, 1, 0,
+			0, 0, 0, 1);
+
+		mat4 MVPTransform = Scale * Rotate * Trans * camera.V() * camera.P();
 		int location = glGetUniformLocation(shaderProgram, "MVP");
 		if (location >= 0) glUniformMatrix4fv(location, 1, GL_TRUE, MVPTransform); // set uniform variable MVP to the MVPTransform
 		else printf("uniform MVP cannot be set\n");
