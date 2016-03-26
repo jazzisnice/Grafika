@@ -316,14 +316,12 @@ vec4 sebesseg(int i) {
 	if (i == 0) {
 		float nevezo1 = csomopontok[1].t - csomopontok[0].t;
 		float nevezo2 = csomopontok[0].t - csomopontok[nVertices + 1].t;
-		//printf("sebesseg fuggvenyben: %f  ---  %f ", csomopontok[1].koord.v[1], csomopontok[0].koord.v[1]);
 		return ((csomopontok[1].koord - csomopontok[i].koord) / nevezo1 +
 			(csomopontok[0].koord - csomopontok[nVertices + 1].koord) / nevezo2) * 0.9;
 	}
 	if (i == nVertices + 1) {
 		float nevezo1 = csomopontok[0].t - csomopontok[i].t;
 		float nevezo2 = csomopontok[i].t - csomopontok[i - 1].t;
-		//printf("sebesseg fuggvenyben: %f  ---  %f ", csomopontok[0].koord.v[1], csomopontok[i].koord.v[1]);
 		return ((csomopontok[0].koord - csomopontok[i].koord) / nevezo1 +
 			(csomopontok[i].koord - csomopontok[i - 1].koord) / nevezo2) * 0.9;
 	}
@@ -332,7 +330,6 @@ vec4 sebesseg(int i) {
 	else {
 		float nevezo1 = csomopontok[i + 1].t - csomopontok[i].t;
 		float nevezo2 = csomopontok[i].t - csomopontok[i - 1].t;
-		//printf("sebesseg fuggvenyben: %f  ---  %f ", csomopontok[i + 1].koord.v[1], csomopontok[i].koord.v[1]);
 		return ((csomopontok[i + 1].koord - csomopontok[i].koord) / nevezo1 +
 			(csomopontok[i].koord - csomopontok[i - 1].koord) / nevezo2) * 0.9;
 	}
@@ -340,14 +337,15 @@ vec4 sebesseg(int i) {
 float tomeg1 = 3;
 float tomeg2 = 2;
 
-float allando = 0.006f;
+float allando = 0.0005f;
 
 class Star {
+
 protected:
 	float tomeg = 10;
 public:
-	unsigned int vao; //Vertex array object id
-	float sx, sy; //SCALING-re van
+	unsigned int vao; 
+	float sx, sy; 
 	float wTx, wTy; 
 	unsigned int vbo[2];
 
@@ -381,25 +379,21 @@ public:
 	void Create() {
 		glGenVertexArrays(1, &vao);
 		glBindVertexArray(vao);
-
-
 		glGenBuffers(2, &vbo[0]);
-
-		//vertex koordináták:
 		glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
 		static float vertexCoords[] = {
-			center - (r / 2), center - (r / 2),                         //14
-			center - (r / 2) , center + (r / 2),                  //1
-			center + (r / 2) , center + (r / 2),                  //5
-			center + (r / 2), center - (r / 2),                       //9
-			center - (r / 2), center - (r / 2),                         //14
-			center - (r / 6) , center + (r / 2),                    //2
-			center + (r / 6) , center + (r / 2),                    //4
-			center             , center + (r - r * (1.0 / 3.0)) ,   //3
-			center + (r - r * (1.0 / 3.0)), center,                 //7
-			center           , center - (r - r * (1.0 / 3.0)),      //11
-			center - (r - r * (1.0 / 3.0)), center,                 //16
-			center             , center + (r - r * (1.0 / 3.0))             //3
+			center - (r / 2), center - (r / 2),                  
+			center - (r / 2) , center + (r / 2),               
+			center + (r / 2) , center + (r / 2),                  
+			center + (r / 2), center - (r / 2),                      
+			center - (r / 2), center - (r / 2),                      
+			center - (r / 6) , center + (r / 2),                
+			center + (r / 6) , center + (r / 2),                  
+			center             , center + (r - r * (1.0 / 3.0)) ,
+			center + (r - r * (1.0 / 3.0)), center,              
+			center           , center - (r - r * (1.0 / 3.0)),    
+			center - (r - r * (1.0 / 3.0)), center,              
+			center             , center + (r - r * (1.0 / 3.0))          
 		};
 		glBufferData(
 			GL_ARRAY_BUFFER,
@@ -413,7 +407,7 @@ public:
 			2, GL_FLOAT,
 			GL_FALSE,
 			0, NULL);
-		//Eddig voltak a koordináták, innen jönnek a színek
+
 
 		glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
 		static float vertexColors[] = {
@@ -435,17 +429,15 @@ public:
 					break;
 
 				vec4 e = r_t(i, t);
-				//printf("koordinatak: : : %f , %f \n", e.v[0], e.v[1]);
 				wTx = e.v[0]; 
 				wTy = e.v[1];
 			
 				rotX = cos(time / 800);
 				rotY = sinf(time / 800);
 		}
-		sx = 0.6 + fabs(sinf(time/220.0)); // *sinf(t);
-		sy = 0.6 + fabs(sinf(time/220.0)); // *cosf(t);
-		//wTx = 0; // 4 * cosf(t / 2);
-		//wTy = 0; // 4 * sinf(t / 2);
+		sx = 0.6 + fabs(sinf(time/220.0)); 
+		sy = 0.6 + fabs(sinf(time/220.0)); 
+
 	}
 	void Draw() {
 
@@ -477,12 +469,13 @@ public:
 };
 
 class Star2 {
+	float elozoTav;
 protected:
 	float tomeg = 2;
 public:
-	unsigned int vao; //Vertex array object id
-	float sx, sy; //SCALING-re van
-	float wTx, wTy; // translation
+	unsigned int vao; 
+	float sx, sy; 
+	float wTx, wTy;
 	unsigned int vbo[2];
 
 	float rotX = 0;
@@ -522,21 +515,21 @@ public:
 
 		glGenBuffers(2, &vbo[0]);
 
-		//vertex koordináták:
+	
 		glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
 		static float vertexCoords[] = {
-			center - (r / 2), center - (r / 2),                         //14
-			center - (r / 2) , center + (r / 2),                  //1
-			center + (r / 2) , center + (r / 2),                  //5
-			center + (r / 2), center - (r / 2),                       //9
-			center - (r / 2), center - (r / 2),                         //14
-			center - (r / 6) , center + (r / 2),                    //2
-			center + (r / 6) , center + (r / 2),                    //4
-			center             , center + (r - r * (1.0 / 3.0)) ,   //3
-			center + (r - r * (1.0 / 3.0)), center,                 //7
-			center           , center - (r - r * (1.0 / 3.0)),      //11
-			center - (r - r * (1.0 / 3.0)), center,                 //16
-			center             , center + (r - r * (1.0 / 3.0))             //3
+			center - (r / 2), center - (r / 2),                      
+			center - (r / 2) , center + (r / 2),                
+			center + (r / 2) , center + (r / 2),                 
+			center + (r / 2), center - (r / 2),                      
+			center - (r / 2), center - (r / 2),                        
+			center - (r / 6) , center + (r / 2),                    
+			center + (r / 6) , center + (r / 2),                    
+			center             , center + (r - r * (1.0 / 3.0)) ,  
+			center + (r - r * (1.0 / 3.0)), center,                 
+			center           , center - (r - r * (1.0 / 3.0)),      
+			center - (r - r * (1.0 / 3.0)), center,                 
+			center             , center + (r - r * (1.0 / 3.0))           
 		};
 		glBufferData(
 			GL_ARRAY_BUFFER,
@@ -550,7 +543,7 @@ public:
 			2, GL_FLOAT,
 			GL_FALSE,
 			0, NULL);
-		//Eddig voltak a koordináták, innen jönnek a színek
+		
 
 		glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
 		static float vertexColors[] = {
@@ -567,13 +560,15 @@ public:
 	void setV(vec4 nagyCsillag) {
 		vec4 e = nagyCsillag - vec4(wTx, wTy, 0, 1);
 		float len = sqrtf(e.v[0] * e.v[0] + e.v[1] * e.v[1]);
-		if (len > 0.05) {
-			vec4 k = e * ((tomeg1 * tomeg2) / (len *len *len)) * allando; //printf("mozgas vektora: %f , %f \n", e.v[0], e.v[1]);
-			v = k / tomeg2 - (v*0.08);
+
+		if (len > 5) {
+			vec4 k = e * ((tomeg1 * tomeg2) / (len * len * len)) * allando * 1.5; 
+			v = v + k / tomeg2 - (v*0.08);
 		}
 		else {
-			v = v*(-1);
+			
 		}
+		elozoTav = len;
 	}
 	void Animate(float time) {
 		wTx += v.v[0];
@@ -710,21 +705,23 @@ public:
 
 	void AddPoint(float cX, float cY, float time) {
 		if (nVertices >= 10) return;
-		//printf("1 ---- A ket koordinata az egertol: %f es %f \n", cX, cY);
+
 
 		vec4 wVertex = vec4(cX, cY, 0, 1) * camera.Pinv() * camera.Vinv();
 
 		csomopontok[nVertices].koord = wVertex;
-		csomopontok[nVertices].t = time;// printf("%f \n", time);
+		csomopontok[nVertices].t = time;
+		
+
+		csomopontok[nVertices + 1].koord = csomopontok[0].koord;
+		csomopontok[nVertices + 1].seb = csomopontok[0].seb;
+		csomopontok[nVertices + 1].t = csomopontok[nVertices].t + 500;
+
 		if (nVertices > 0) {
 			for (int i = 0; i <= nVertices; i++) {
 				csomopontok[i].seb = sebesseg(i);
 			}
 		}
-
-		csomopontok[nVertices + 1].koord = csomopontok[0].koord;
-		csomopontok[nVertices + 1].seb = csomopontok[0].seb;
-		csomopontok[nVertices + 1].t = csomopontok[nVertices].t + 500;
 
 		for (int i = 0; i < nVertices + 1; i++) {
 			int a = 0;
@@ -753,7 +750,7 @@ public:
 			else printf("uniform MVP cannot be set\n");
 
 			glBindVertexArray(vao);
-			glDrawArrays(GL_LINE_STRIP, 0, (nVertices)*80);
+			glDrawArrays(GL_LINE_LOOP, 0, (nVertices)*80);
 		}
 	}
 };

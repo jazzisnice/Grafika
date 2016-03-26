@@ -1,25 +1,25 @@
 ﻿  Skeleton.cpp
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(321): warning C4305: 'argument': truncation from 'double' to 'const float'
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(328): warning C4305: 'argument': truncation from 'double' to 'const float'
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(337): warning C4305: 'argument': truncation from 'double' to 'const float'
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(403): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(403): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(430): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(442): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(445): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(445): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(446): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(446): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(540): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(540): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(572): warning C4305: 'argument': truncation from 'double' to 'const float'
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(581): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(581): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(582): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(582): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(584): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(873): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(890): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(897): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
-c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(898): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(320): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(326): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(334): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(397): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(397): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(424): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(435): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(438): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(438): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(439): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(439): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(533): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(533): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(566): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(576): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(576): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(577): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(577): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(579): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(870): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(887): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(894): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
+c:\users\viktor\documents\github\grafika\opengl\programs\skeleton\skeleton\skeleton.cpp(895): warning C4244: 'argument': conversion from 'long' to 'float', possible loss of data
   Skeleton.vcxproj -> C:\Users\viktor\Documents\GitHub\Grafika\opengl\Programs\Skeleton\bin\Skeleton.exe
